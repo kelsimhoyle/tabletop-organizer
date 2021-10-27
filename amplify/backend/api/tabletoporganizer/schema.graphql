@@ -1,0 +1,47 @@
+type Shelf @model 
+  @auth(rules: [{ allow: owner, ownerField: "owner" operations: [create, delete, update] }]) {
+  id: ID!
+  name: String!
+  games: [ShelvedGame] @connection(keyName: "byShelf", fields: ["id"])
+  owner: String!
+}
+
+type Game @model 
+{
+  id: ID!
+  name: String!
+  description: String!
+  manufactuer: String
+  image: String
+  uploadedBy: String
+  ratings: [Rating] @connection(keyName: "byGameId", fields: ["id"])
+}
+
+type ShelvedGame @model 
+@key(name: "byShelf", fields: ["shelfID", "gameID"])
+{
+  id: ID!
+  shelfID: ID!
+  gameID: ID!
+  game: Game! @connection(fields: ["gameID"])
+  shelf: Shelf! @connection(fields: ["shelfID"])
+}
+
+type Rating @model @key(name: "byGameId", fields: ["gameID"]) 
+  @auth(rules: [{ allow: owner, operations: [create, delete, update] }]) {
+  id: ID!
+  name: String!
+  gameID: ID!
+  game: Game @connection(fields: ["gameID"])
+  comment: [Comment] @connection( fields: ["id"])
+  shelf: Boolean!
+  favorite: Boolean
+}
+
+type Comment @model @key(name: "byRating", fields: ["ratingID", "content"])
+  @auth(rules: [{ allow: owner, operations: [create, delete, update] }]) {
+  id: ID!
+  ratingID: ID!
+  post: Rating @connection(fields: ["ratingID"])
+  content: String!
+}

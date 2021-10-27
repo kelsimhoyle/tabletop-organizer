@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "tabletoporganizer",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authtabletoporganizer7244af3a",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
