@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import awsConfig from "./aws-exports";
+import { AuthContextProvider} from "./contexts/AuthContext";
 
 ReactDOM.render(
   <React.StrictMode>
+    <AuthContextProvider awsconfig={awsConfig}>
     <App />
+    </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
