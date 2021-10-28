@@ -1,12 +1,16 @@
-import React, { useState, useContext } from "react";
-// import { AuthContext } from "../contexts/AuthContext";
+import React, { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 import { Auth } from "aws-amplify";
 
 const Login: React.FC<{}> = () => {
   const [val, setVal] = useState({ username: "", password: "" });
 
-  // const { user } = useContext(AuthContext);
-  // console.log(user);
+  const { username } = useContext(AuthContext);
+  useEffect(() => {
+    if (username) setVal({ ...val, username: username });
+
+  }, [username])
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

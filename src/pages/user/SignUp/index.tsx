@@ -55,8 +55,8 @@ const SignUp: React.FC<{}> = () => {
       .then((data) => {
         console.log("signed up");
         Auth.signIn(username, password)
-            .then(user => console.log(user))
-            .catch(err => console.error(err))
+          .then((user) => console.log(user))
+          .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
   };
