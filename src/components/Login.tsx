@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Auth } from "aws-amplify";
+import { Link } from "react-router-dom";
 
-const Login: React.FC<{}> = () => {
+import { Form, FormDiv, MainButton } from "../styles";
+
+const Login: React.FC<{handleToggle: () => void}> = ({handleToggle}) => {
   const [val, setVal] = useState({ username: "", password: "" });
 
   const { username } = useContext(AuthContext);
@@ -35,8 +38,9 @@ const Login: React.FC<{}> = () => {
     }
   };
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <FormDiv>
+      <div>
+      <Form onSubmit={(e) => handleSubmit(e)}>
         <label>
           Username
           <input
@@ -55,9 +59,21 @@ const Login: React.FC<{}> = () => {
             onChange={(e) => handleChange(e)}
           />
         </label>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+        <MainButton type="submit">Login</MainButton>
+      </Form>
+      <Link to="/users/forgotpassword">
+            Reset your password
+          </Link>
+      </div>
+      <div>
+        <h2>Welome back!</h2>
+        <p>Sign in to start exploring board games.</p>
+        <p>Don't have an account?</p>
+          <MainButton onClick={() => handleToggle()} >
+          Sign Up
+        </MainButton>
+      </div>
+    </FormDiv>
   );
 };
 

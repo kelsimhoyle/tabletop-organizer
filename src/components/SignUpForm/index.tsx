@@ -1,9 +1,11 @@
 import React from "react";
-import { SignUpVals } from "../../pages/user/SignUp";
+import { SignUpVals } from "../SignUp";
+
+import { Form, MainButton } from "../../styles";
 
 const  SignUpForm: React.FC<{handleSignUp: (e: React.FormEvent<HTMLFormElement>) => void, vals: SignUpVals, handleChange: (e: React.ChangeEvent<HTMLInputElement>)  => void}> = ({handleChange, handleSignUp, vals}) => {
     return (
-        <form onSubmit={handleSignUp}>
+        <Form onSubmit={handleSignUp}>
           <label>
             Username
             <input
@@ -40,10 +42,10 @@ const  SignUpForm: React.FC<{handleSignUp: (e: React.FormEvent<HTMLFormElement>)
               onChange={(e) => handleChange(e)}
             />
           </label>
-          <button type="submit">
+          <MainButton type="submit">
               Sign Up
-          </button>
-        </form>
+          </MainButton>
+        </Form>
     );
 };
 

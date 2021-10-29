@@ -6,7 +6,6 @@ import { AuthContext } from "./contexts/AuthContext";
 import Header from "./components/Header";
 
 import Auth from "./pages/user/Auth";
-import SignUp from "./pages/user/SignUp";
 import ForgotPassword from "./pages/user/ForgotPassword";
 import Dashboard from "./pages/user/Dashboard";
 import Home from "./pages/Home";
@@ -24,8 +23,7 @@ const App: React.FC<{}> = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/game/:gameId" component={Game} />
-        <Route path="/users/login" component={Auth} />
-        <Route path="/users/signup" component={SignUp} />
+        <Route path="/users/auth/:step" component={Auth} />
         <Route path="/users/forgotpassword" component={ForgotPassword} />
         <Route path="/users/dashboard" component={Dashboard} />
       </Switch>

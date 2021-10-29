@@ -1,5 +1,7 @@
 import React from "react";
-import { SignUpVals } from "../../pages/user/SignUp";
+import { SignUpVals } from "../SignUp";
+
+import { Form, MainButton } from "../../styles";
 
 const AuthCodeConfirm: React.FC<{
   submitAuth: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -7,7 +9,7 @@ const AuthCodeConfirm: React.FC<{
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }> = ({ handleChange, submitAuth, vals }) => {
   return (
-    <form onSubmit={submitAuth}>
+    <Form onSubmit={submitAuth}>
       <label>
         Auth Code
         <input
@@ -17,8 +19,8 @@ const AuthCodeConfirm: React.FC<{
           onChange={(e) => handleChange(e)}
         />
       </label>
-      <button type="submit">Submit Auth Code</button>
-    </form>
+      <MainButton type="submit">Submit Auth Code</MainButton>
+    </Form>
   );
 };
 

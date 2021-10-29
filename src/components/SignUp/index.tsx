@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
+import { Redirect } from "react-router";
 
-import SignUpForm from "../../../components/SignUpForm";
-import AuthCodeConfirm from "../../../components/AuthCodeConfirm";
+import SignUpForm from "../SignUpForm";
+import AuthCodeConfirm from "../AuthCodeConfirm";
 import { stringValueLength1to1024 } from "aws-sdk/clients/finspacedata";
+
+import { Form, FormDiv, MainButton } from "../../styles";
 
 export interface SignUpVals {
   username: string;
@@ -13,7 +16,7 @@ export interface SignUpVals {
   authCode: string;
 }
 
-const SignUp: React.FC<{}> = () => {
+const SignUp: React.FC<{ handleToggle: () => void }> = ({ handleToggle }) => {
   const [vals, setVals] = useState<SignUpVals>({
     username: "",
     password: "",
@@ -21,7 +24,8 @@ const SignUp: React.FC<{}> = () => {
     phone_number: "",
     authCode: "",
   });
-  const [stage, setStage] = useState(0);
+  const [stage, setStage] = useState<Number>(0);
+  const [success, setSuccess] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,6 +40,7 @@ const SignUp: React.FC<{}> = () => {
 
   const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     Auth.signUp({
       username,
       password,
@@ -55,30 +60,38 @@ const SignUp: React.FC<{}> = () => {
       .then((data) => {
         console.log("signed up");
         Auth.signIn(username, password)
-          .then((user) => console.log(user))
+          .then((user) => {
+            console.log(user);
+            setSuccess(true);
+          })
           .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err));
   };
+
+  if (success) return <Redirect to="/users/dashboard" push={true} />;
   return (
-    <div>
-      <h1>SignUp</h1>
+    <FormDiv>
+      {stage === 0 ? (
+        <SignUpForm
+          handleSignUp={handleSignUp}
+          handleChange={handleChange}
+          vals={vals}
+        />
+      ) : (
+        <AuthCodeConfirm
+          handleChange={handleChange}
+          submitAuth={submitAuth}
+          vals={vals}
+        />
+      )}
       <div>
-        {stage === 0 ? (
-          <SignUpForm
-            handleSignUp={handleSignUp}
-            handleChange={handleChange}
-            vals={vals}
-          />
-        ) : (
-          <AuthCodeConfirm
-            handleChange={handleChange}
-            submitAuth={submitAuth}
-            vals={vals}
-          />
-        )}
+        <h2>Nice to meet you!</h2>
+        <p>Sign up to start exploring board games.</p>
+        <p>Already have an account?</p>
+        <MainButton onClick={() => handleToggle()}>Sign In</MainButton>
       </div>
-    </div>
+    </FormDiv>
   );
 };
 
