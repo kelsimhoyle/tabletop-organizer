@@ -19,7 +19,6 @@ const SlideAnimation: React.FC<Props> = ({ children, toggle }) => {
       transform: `translate3d(${toggle ? "-150%" : "150"},0, 0)`,
       opacity: 0,
     },
-    delay: 100,
     config: { ...config.slow },
   });
 

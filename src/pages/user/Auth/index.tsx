@@ -1,10 +1,12 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import Login from "../../components/Login";
-import SignUp from "../../components/SignUp";
-import SlideAnimation from "../../components/animations/SlideAnimation";
-import { AuthContext } from "../../contexts/AuthContext";
+import Login from "../../../components/Login";
+import SignUp from "../../../components/SignUp";
+import SlideAnimation from "../../../components/animations/SlideAnimation";
+import { AuthContext } from "../../../contexts/AuthContext";
+
+import {AuthPage} from "./styles";
 
 interface RouteParams {
   step: string;
@@ -24,13 +26,12 @@ const Auth: React.FC<{ props: any }> = ({ props }) => {
   }, [setToggleView]);
 
   return (
-    <div>
-      <h1>Auth</h1>
+    <AuthPage>
       <SlideAnimation toggle={toggle}>
         <SignUp handleToggle={handleToggle} />
         <Login handleToggle={handleToggle} />
       </SlideAnimation>
-    </div>
+    </AuthPage>
   );
 };
 

@@ -42,7 +42,7 @@ const  SignUpForm: React.FC<{handleSignUp: (e: React.FormEvent<HTMLFormElement>)
               onChange={(e) => handleChange(e)}
             />
           </label>
-          <MainButton type="submit">
+          <MainButton type="submit" color="main">
               Sign Up
           </MainButton>
         </Form>

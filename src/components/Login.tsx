@@ -39,7 +39,8 @@ const Login: React.FC<{handleToggle: () => void}> = ({handleToggle}) => {
   };
   return (
     <FormDiv>
-      <div>
+      <div className="form">
+        <h2>Login</h2>
       <Form onSubmit={(e) => handleSubmit(e)}>
         <label>
           Username
@@ -59,13 +60,13 @@ const Login: React.FC<{handleToggle: () => void}> = ({handleToggle}) => {
             onChange={(e) => handleChange(e)}
           />
         </label>
-        <MainButton type="submit">Login</MainButton>
+        <MainButton type="submit" color="main">Login</MainButton>
       </Form>
       <Link to="/users/forgotpassword">
             Reset your password
           </Link>
       </div>
-      <div>
+      <div className="about">
         <h2>Welome back!</h2>
         <p>Sign in to start exploring board games.</p>
         <p>Don't have an account?</p>

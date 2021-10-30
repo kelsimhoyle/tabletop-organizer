@@ -72,6 +72,14 @@ const SignUp: React.FC<{ handleToggle: () => void }> = ({ handleToggle }) => {
   if (success) return <Redirect to="/users/dashboard" push={true} />;
   return (
     <FormDiv>
+      <div className="about">
+        <h2>Nice to meet you!</h2>
+        <p>Sign up to start exploring board games.</p>
+        <p>Already have an account?</p>
+        <MainButton onClick={() => handleToggle()}>Sign In</MainButton>
+      </div>
+      <div className="form">
+      <h2>Sign Up</h2>
       {stage === 0 ? (
         <SignUpForm
           handleSignUp={handleSignUp}
@@ -85,13 +93,9 @@ const SignUp: React.FC<{ handleToggle: () => void }> = ({ handleToggle }) => {
           vals={vals}
         />
       )}
-      <div>
-        <h2>Nice to meet you!</h2>
-        <p>Sign up to start exploring board games.</p>
-        <p>Already have an account?</p>
-        <MainButton onClick={() => handleToggle()}>Sign In</MainButton>
       </div>
     </FormDiv>
+
   );
 };
 

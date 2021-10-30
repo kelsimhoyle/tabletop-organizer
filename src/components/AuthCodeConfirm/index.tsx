@@ -19,7 +19,7 @@ const AuthCodeConfirm: React.FC<{
           onChange={(e) => handleChange(e)}
         />
       </label>
-      <MainButton type="submit">Submit Auth Code</MainButton>
+      <MainButton type="submit" color="main">Submit Auth Code</MainButton>
     </Form>
   );
 };

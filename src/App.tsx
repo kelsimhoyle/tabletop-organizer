@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { AuthContext } from "./contexts/AuthContext";
+import Theme from "./styles/Theme";
 
 import Header from "./components/Header";
 
@@ -18,16 +19,18 @@ const App: React.FC<{}> = () => {
   console.log(context);
 
   return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/game/:gameId" component={Game} />
-        <Route path="/users/auth/:step" component={Auth} />
-        <Route path="/users/forgotpassword" component={ForgotPassword} />
-        <Route path="/users/dashboard" component={Dashboard} />
-      </Switch>
-    </Router>
+    <Theme>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/game/:gameId" component={Game} />
+          <Route path="/users/auth/:step" component={Auth} />
+          <Route path="/users/forgotpassword" component={ForgotPassword} />
+          <Route path="/users/dashboard" component={Dashboard} />
+        </Switch>
+      </Router>
+    </Theme>
   );
 };
 
