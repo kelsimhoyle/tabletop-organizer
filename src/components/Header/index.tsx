@@ -22,7 +22,9 @@ const Header: React.FC<{}> = () => {
   return (
     <Head>
       <div>
-        <p>Tabletop Organizer</p>
+        <Link to="/">
+          <h1>Tabletop Organizer</h1>
+        </Link>
       </div>
       <div>
         {user ? (
@@ -30,9 +32,7 @@ const Header: React.FC<{}> = () => {
             SignOut{" "}
           </button>
         ) : (
-          <Link to="/users/login"> 
-          Login
-          </Link>
+          <Link to="/users/auth/login">Login</Link>
         )}
       </div>
     </Head>

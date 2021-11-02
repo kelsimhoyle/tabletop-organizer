@@ -6,7 +6,7 @@ import SignUp from "../../../components/SignUp";
 import SlideAnimation from "../../../components/animations/SlideAnimation";
 import { AuthContext } from "../../../contexts/AuthContext";
 
-import {AuthPage} from "./styles";
+import { AuthPage } from "../../../styles";
 
 interface RouteParams {
   step: string;
