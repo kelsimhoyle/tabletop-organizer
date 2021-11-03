@@ -2,13 +2,16 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 
 import { Form, FormDiv, MainButton } from "../styles";
 
 const Login: React.FC<{handleToggle: () => void}> = ({handleToggle}) => {
   const [val, setVal] = useState({ username: "", password: "" });
+  const [success, setSuccess] = useState<boolean>(false);
 
-  const { username } = useContext(AuthContext);
+  const { username, authState } = useContext(AuthContext);
+
   useEffect(() => {
     if (username) setVal({ ...val, username: username });
 
@@ -33,14 +36,23 @@ const Login: React.FC<{handleToggle: () => void}> = ({handleToggle}) => {
         .then((user) => {
           console.log("signed in");
           setVal({ username: "", password: "" });
+          setSuccess(true);
         })
         .catch((err) => console.error(err));
     }
   };
+
+  if (success) return <Redirect to="/users/dashboard" push={true} />
   return (
     <FormDiv>
       <div className="form">
         <h2>Login</h2>
+        {authState === "signedIn" && (
+          <>
+          <p>It looks like you're already logged in.</p>
+          <Link to="/users/dashboard"> Go to your dashboard.</Link>
+          </>
+        )}
       <Form onSubmit={(e) => handleSubmit(e)}>
         <label>
           Username

@@ -26,7 +26,7 @@ const AuthContextProvider: React.FC<{
   const [username, setUsername] = useState("");
 
   const handleStateChange = useCallback((authState: string, user: any) => {
-    if (authState === "signedOut" && user.length) {
+    if (authState === "signedOut" && user) {
       setUsername(user);
     } else {
       setAuthState(authState);
